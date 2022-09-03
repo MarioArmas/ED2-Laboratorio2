@@ -101,7 +101,3 @@ export function decode(binaryToDecode, dict) {
 
   return word
 }
-
-/* const { dictLetters, dictBinary } = huffmanEncoding('Some string')
-console.log(encode('Some string', dictLetters))
-console.log(decode('11011101111000110001010011100101', dictBinary)) */

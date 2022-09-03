@@ -37,8 +37,6 @@ const insert = (key) => {
 }
 
 const remove = (key) => {
-  sortByDPI()
-
   const func = sortedByName ? compareByName : compareByDPI
   mainRoot = removeNode(mainRoot, key, func)
 }
@@ -48,8 +46,8 @@ const update = (key) => {
 }
 
 const search = (key) => {
-  sortByName()
-  const items = searchNode(mainRoot, key, [])
+  const func = sortedByName ? compareByName : compareByDPI
+  const items = searchNode(mainRoot, key, [], func)
   
   return items
 }
@@ -164,13 +162,12 @@ const updateNode = (root, key) => {
   updateNode(root.right, key)
 }
 
-const searchNode = (root, key, items = []) => {
-  sortByName()
+const searchNode = (root, key, items = [], compare) => {
   if (root == null) return
-
-  if (key.name <= root.person.name) searchNode(root.left, key, items)
-  if (root.person.name == key.name) items.push(root.person)
-  if (key.name >= root.person.name) searchNode(root.right, key, items)
+  
+  if (!compare(key, '>', root.person)) searchNode(root.left, key, items, compare)
+  if (compare(root.person, '==', key)) items.push(root.person)
+  if (!compare(key, '<', root.person)) searchNode(root.right, key, items, compare)
 
   return items
 }
@@ -279,8 +276,9 @@ async function mainFunction(data) {
     person?.dateBirth
     dictionary[operationString](person)
   })
+  sortByDPI()
 
-  console.log('SEARCH', search({ name: 'carmela' }).map(person => {
+  console.log('SEARCH', search({ dpi: encode('9323924104051', dictLetters) }).map(person => {
     return {...person, "dpi":decode(person.dpi, dictBinary)}
   }))
 }
