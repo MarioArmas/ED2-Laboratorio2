@@ -37,7 +37,7 @@ function getChars(string) {
   return { charArray, charFrequency }
 }
 
-function huffmanEncoding(string) {
+export function huffmanEncoding(string) {
   const { charArray, charFrequency } = getChars(string)
   let root = null
   const queue = makeQueue(charArray, charFrequency)
@@ -77,7 +77,7 @@ function getTree(root, s, dict) {
   return [...dict, getTree(root.left, s + '0', dict) , getTree(root.right, s + '1', dict)]
 }
 
-function encode(stringToEncode, dict) {
+export function encode(stringToEncode, dict) {
   let binary = ''
   stringToEncode.replace(/\s+/g, '').toLowerCase().split('').forEach(char => {
     binary += dict[char]
@@ -86,7 +86,7 @@ function encode(stringToEncode, dict) {
   return binary
 }
 
-function decode(binaryToDecode, dict) {
+export function decode(binaryToDecode, dict) {
   const binary = binaryToDecode.split('')
   let i = 0
   let j = 1

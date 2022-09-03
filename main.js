@@ -1,3 +1,5 @@
+import { huffmanEncoding, encode, decode } from './huffman.js'
+
 let mainRoot = null
 let sortedByName = true
 
@@ -272,12 +274,16 @@ async function mainFunction(data) {
   data.forEach((item) => {
     const operationString = item[0]
     const person = item[1]
+    person.dpi = encode(person.dpi, dictLetters)
     person?.address
     person?.dateBirth
     dictionary[operationString](person)
   })
 
-  console.log('SEARCH', search({ name: 'carmela' }))
+  console.log('SEARCH', search({ name: 'carmela' }).map(person => {
+    return {...person, "dpi":decode(person.dpi, dictBinary)}
+  }))
 }
 
+const { dictLetters, dictBinary } = huffmanEncoding('0123456789')
 mainFunction(await readFile())
