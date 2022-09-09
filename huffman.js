@@ -64,7 +64,7 @@ export function huffmanEncoding(string) {
     dictBinary[dict[i + 1]] = dict[i]
   }
 
-  return { dictLetters, dictBinary }
+  return { "huffmanTree": root , dictLetters, dictBinary }
 }
 
 function getTree(root, s, dict) {

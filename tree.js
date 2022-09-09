@@ -214,7 +214,7 @@ class Tree {
     this.mainRoot = null
     this.sortedByName = true
     
-    items.forEach(x => {
+    items?.forEach(x => {
       this.insert(x)
     })
   }
@@ -224,7 +224,7 @@ class Tree {
     this.mainRoot = null
     this.sortedByName = false
     
-    items.forEach(x => {
+    items?.forEach(x => {
       this.insert(x)
     })
   }
