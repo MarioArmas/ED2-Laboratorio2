@@ -1,10 +1,12 @@
 import { huffmanEncoding, encode, decode } from './huffman.js'
-import { insert, update, remove, search, sortByDPI } from './tree.js'
+import Tree from './tree.js'
+
+const companyTree = new Tree
 
 const dictionary = {
-  "INSERT": insert,
-  "PATCH": update,
-  "DELETE": remove,
+  "INSERT": companyTree.insert,
+  "PATCH": companyTree.update,
+  "DELETE": companyTree.remove,
 }
 
 const trees = {}
@@ -36,9 +38,9 @@ async function mainFunction(data) {
     person?.dateBirth
     dictionary[operationString](person)
   })
-  sortByDPI()
+  companyTree.sortByDPI()
 
-  console.log('SEARCH', search({ dpi: encode('9323924104051', dictLetters) }).map(person => {
+  console.log('SEARCH', companyTree.search({ dpi: encode('9323924104051', dictLetters) }).map(person => {
     return {...person, "dpi":decode(person.dpi, dictBinary)}
   }))
 }
