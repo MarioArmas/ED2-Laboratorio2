@@ -29,7 +29,7 @@ async function mainFunction(data) {
     const operationString = item[0]
     const person = item[1]
     person?.address
-    person?.dateBirth
+    person?.datebirth
 
     person?.companies?.forEach(company => {
       // create tree for each company
