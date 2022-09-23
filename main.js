@@ -48,8 +48,10 @@ async function mainFunction(data) {
     })
   })
 
-  console.log('SEARCH', trees['BANCO S.A.'].tree.search({ dpi: encode('5822613821272', trees['BANCO S.A.'].huffman.dictLetters) })?.map(person => {
-    return {...person, 'dpi':decode(person.dpi, trees['BANCO S.A.'].huffman.dictBinary), 'dpiEncoded':person.dpi}
+  const dpiSearch = '8227056257156'
+  const bank = 'Bogisich Group'
+  console.log('SEARCH', trees[bank].tree.search({ dpi: encode(dpiSearch, trees[bank].huffman.dictLetters) })?.map(person => {
+    return {...person, 'dpi':decode(person.dpi, trees[bank].huffman.dictBinary), 'dpiEncoded':person.dpi}
   }))
 }
 
