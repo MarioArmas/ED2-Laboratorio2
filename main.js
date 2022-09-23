@@ -10,7 +10,7 @@ const dictionary = (key, companyTree, person) => {
 const trees = {}
 
 async function readFile() {
-  const file = await fetch('test.txt')
+  const file = await fetch('input.csv')
   .then(response => response.text())
   .then(data => {
     return data.split('\r\n')
